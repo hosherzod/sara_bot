@@ -1,11 +1,2 @@
-services:
-  - type: web
-    name: sara-bot
-    runtime: python:3.10
-    buildCommand: ""
-    startCommand: python bot3.py
-    envVars:
-      - key: BOT_TOKEN
-        sync: false
-      - key: WEBHOOK_URL
-        sync: false
+
+

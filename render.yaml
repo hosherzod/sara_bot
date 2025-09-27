@@ -5,9 +5,9 @@ services:
     region: oregon
     buildCommand: ""
     startCommand: python bot3.py
+    runtime: python:3.12  # ← Faqat 3.9, 3.10 yoki 3.12
     envVars:
       - key: BOT_TOKEN
         sync: false
       - key: WEBHOOK_URL
         sync: false
-    runtime: python:3.11  # ← BU MUHIM!

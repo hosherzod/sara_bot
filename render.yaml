@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: sara-bot
+    env: python
+    region: oregon
+    buildCommand: ""
+    startCommand: python bot3.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: WEBHOOK_URL
+        sync: false
+    runtime: python:3.11  # ← BU MUHIM!

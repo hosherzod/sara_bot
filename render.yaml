@@ -1,14 +1,11 @@
 services:
   - type: web
     name: sara-bot
-    env: python
-    region: oregon
+    runtime: python:3.10
     buildCommand: ""
     startCommand: python bot3.py
-    runtime: python:3.10  # ← Faqat 3.9, 3.10 yoki 3.12
     envVars:
       - key: BOT_TOKEN
         sync: false
       - key: WEBHOOK_URL
         sync: false
-

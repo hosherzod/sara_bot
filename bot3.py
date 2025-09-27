@@ -6,13 +6,11 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 import logging
 
+# Logging sozlamalari
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
-
-# Webhook URL — Render tomonidan beriladi (masalan: https://your-bot.onrender.com)
-WEBHOOK_URL = os.environ.get("WEBHOOK_URL", "")
 
 async def start(update: Update, context) -> None:
     await update.message.reply_text("3x4 uchun rasm yuklang")
@@ -75,18 +73,18 @@ async def process_image(update: Update, context) -> None:
         logging.error(f"Xatolik: {e}")
         await update.message.reply_text("Rasmni qayta ishlashda xatolik yuz berdi.")
 
-# Web server uchun asosiy funksiya
 def main() -> None:
     TOKEN = os.environ.get("BOT_TOKEN")
     if not TOKEN:
         raise ValueError("BOT_TOKEN muhit o'zgaruvchisi sozlanmagan!")
+
+    WEBHOOK_URL = os.environ.get("WEBHOOK_URL", "")
 
     application = Application.builder().token(TOKEN).build()
 
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.PHOTO & ~filters.COMMAND, process_image))
 
-    # Webhook sozlash
     if WEBHOOK_URL:
         application.run_webhook(
             listen="0.0.0.0",
@@ -95,7 +93,6 @@ def main() -> None:
             webhook_url=f"{WEBHOOK_URL}/{TOKEN}"
         )
     else:
-        # Faqat lokal sinash uchun
         application.run_polling()
 
 if __name__ == '__main__':
